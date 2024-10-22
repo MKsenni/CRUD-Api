@@ -10,7 +10,11 @@ export interface IUser {
 class UserService {
   private users: IUser[] = [];
 
-  create(age: number, hobbies: string[], username: string) {
+  create(body: Omit<IUser, 'id'>) {
+    const { username, age, hobbies } = body;
+    if (!username || !age || !hobbies) {
+      throw new Error();
+    }
     const newUser = {
       id: uuidv4(),
       age: age,
@@ -22,19 +26,24 @@ class UserService {
   }
 
   getAll() {
-    return this.users;
+    const foundUsers = this.users;
+    if (!foundUsers.length) {
+      throw new Error();
+    }
+    return foundUsers;
   }
 
   getOne(id: string) {
-    return this.users.find(user => user.id === id);
-  }
-
-  update(user: IUser) {
-    const { id, age, hobbies, username } = user;
-    const foundUser = this.getOne(id);
+    const foundUser = this.users.find(user => user.id === id);
     if (!foundUser) {
       throw new Error();
     }
+    return foundUser;
+  }
+
+  update(user: IUser, userId: string) {
+    const { age, hobbies, username } = user;
+    const foundUser = this.getOne(userId);
     if (foundUser) {
       user.username = username;
       user.age = age;
@@ -45,9 +54,6 @@ class UserService {
 
   delete(id: string) {
     const foundUser = this.getOne(id);
-    if (!foundUser) {
-      throw new Error();
-    }
     if (foundUser) {
       this.users.splice(this.users.indexOf(foundUser), 1);
     }
