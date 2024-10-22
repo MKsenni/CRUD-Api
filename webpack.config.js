@@ -9,18 +9,15 @@ export default {
     mode: process.env.NODE_ENV || 'production',
     entry: './src/index.ts',
     target: 'node',
-    devServer: {
-        port: 4000,
-        hot: true, // enable hot module replacement
-    },
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
-        // library: {
-        //     type: 'module',
-        // }
+        chunkFormat: 'module',
+        library: {
+            type: 'module',
+        }
     },
-    // experiments: {
-    //     outputModule: true,
-    // },
+    experiments: {
+        outputModule: true,
+    },
 };
