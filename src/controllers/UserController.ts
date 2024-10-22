@@ -61,6 +61,12 @@ class UserController {
     });
     req.on('end', () => {
       const parsedBody = JSON.parse(body);
+      const { age, hobbies, username } = parsedBody;
+      if (!username || !age || !hobbies) {
+        res.writeHead(400, { 'Content-Type': 'text/plain' });
+        res.end('Have not required fields');
+        return;
+      }
       try {
         const newUser = this.service.update(parsedBody, userId);
         res.writeHead(200, { 'Content-Type': 'application/json' });

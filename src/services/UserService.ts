@@ -41,13 +41,15 @@ class UserService {
     return foundUser;
   }
 
-  update(user: IUser, userId: string) {
-    const { age, hobbies, username } = user;
+  update(user: Omit<IUser, 'id'>, userId: string) {
     const foundUser = this.getOne(userId);
     if (foundUser) {
-      user.username = username;
-      user.age = age;
-      user.hobbies = hobbies;
+      this.users = this.users.map(currentUser => {
+        if (currentUser.id === userId) {
+          return { ...user, id: userId };
+        }
+        return currentUser;
+      });
     }
     return user;
   }
