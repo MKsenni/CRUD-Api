@@ -6,7 +6,7 @@ import { validate as isValidUUID } from 'uuid';
 
 const PORT = process.env.PORT || 4000;
 
-const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
+const server = createServer((req: IncomingMessage, res: ServerResponse) => {
   const { method, url } = req;
   const parsedUrl = parse(url || '', true);
   const userId = parsedUrl.pathname?.split('/')[3];

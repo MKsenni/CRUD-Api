@@ -42,7 +42,7 @@ class UserService {
   }
 
   update(user: Omit<IUser, 'id'>, userId: string) {
-    const foundUser = this.getOne(userId);
+    const foundUser = this.users.find(user => user.id === userId);
     if (foundUser) {
       this.users = this.users.map(currentUser => {
         if (currentUser.id === userId) {
@@ -50,8 +50,10 @@ class UserService {
         }
         return currentUser;
       });
+      return user;
+    } else {
+      this.create(user);
     }
-    return user;
   }
 
   delete(id: string) {
