@@ -13,7 +13,6 @@
     "strict": true,
     "noImplicitAny": true,
     "useUnknownInCatchVariables": true,
-    "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true
   },
