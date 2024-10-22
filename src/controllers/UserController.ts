@@ -42,18 +42,16 @@ class UserController {
   }
 
   async getOne(req: IncomingMessage, res: ServerResponse, userId: string) {
-    req.on('end', () => {
-      try {
-        const user = this.service.getOne(userId);
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(user));
-        return;
-      } catch {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('User not found');
-        return;
-      }
-    });
+    try {
+      const user = this.service.getOne(userId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(user));
+      return;
+    } catch {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('User not found');
+      return;
+    }
   }
 
   async update(req: IncomingMessage, res: ServerResponse, userId: string) {
@@ -77,18 +75,16 @@ class UserController {
   }
 
   async delete(req: IncomingMessage, res: ServerResponse, userId: string) {
-    req.on('end', () => {
-      try {
-        this.service.delete(userId);
-        res.writeHead(204, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify('User deleted'));
-        return;
-      } catch {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('User not found');
-        return;
-      }
-    });
+    try {
+      this.service.delete(userId);
+      res.writeHead(204, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify('User deleted'));
+      return;
+    } catch {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('User not found');
+      return;
+    }
   }
 }
 
