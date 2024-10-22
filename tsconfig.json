@@ -13,7 +13,7 @@
     "strict": true,
     "noImplicitAny": true,
     "useUnknownInCatchVariables": true,
-    "noEmit": false,
+    "noEmit": true,
     "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true
