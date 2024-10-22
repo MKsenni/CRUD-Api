@@ -14,7 +14,6 @@ class UserController {
     });
     req.on('end', () => {
       const parsedBody: Omit<IUser, 'id'> = JSON.parse(body);
-      console.log(parsedBody);
       try {
         const newUser = this.service.create(parsedBody);
         res.writeHead(201, { 'Content-Type': 'application/json' });
@@ -61,8 +60,7 @@ class UserController {
     });
     req.on('end', () => {
       const parsedBody = JSON.parse(body);
-      const { age, hobbies, username } = parsedBody;
-      if (!username || !age || !hobbies) {
+      if (!parsedBody.username || !parsedBody.age || !parsedBody.hobbies) {
         res.writeHead(400, { 'Content-Type': 'text/plain' });
         res.end('Have not required fields');
         return;
