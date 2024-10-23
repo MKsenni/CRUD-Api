@@ -45,6 +45,12 @@ npm run start:prod
 ```
 After building, the application will be automatically started on the port defined in the .env file.
 
+### Users are stored as `objects` that have following properties:
+- `id` — unique identifier (`string`, `uuid`) generated on server side
+- `username` — user's name (`string`, **required**)
+- `age` — user's age (`number`, **required**)
+- `hobbies` — user's hobbies (`array` of `strings` or empty `array`, **required**)
+
 ## API Endpoints: 
 
 ``` GET /api/users ```
