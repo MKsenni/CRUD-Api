@@ -1,4 +1,4 @@
-import UserService, { IUser } from '../services/UserService.ts';
+import UserService, { IUser } from '../services/UserService';
 import { IncomingMessage, ServerResponse } from 'node:http';
 
 class UserController {

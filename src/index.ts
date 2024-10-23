@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { createServer, IncomingMessage, ServerResponse } from 'node:http';
-import UserController from './controllers/UserController.ts';
+import UserController from './controllers/UserController';
 import { parse } from 'node:url';
 import { validate as isValidUUID } from 'uuid';
 
